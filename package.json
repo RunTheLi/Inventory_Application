@@ -1,0 +1,27 @@
+{
+  "name": "inventory_application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RunTheLi/Inventory_Application.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RunTheLi/Inventory_Application/issues"
+  },
+  "homepage": "https://github.com/RunTheLi/Inventory_Application#readme",
+  "dependencies": {
+    "dotenv": "^18.0.3",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "pg": "^8.23.0"
+  }
+}
