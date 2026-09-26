@@ -1,0 +1,21 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory App</title>
+</head>
+<body>
+  <h1>Inventory App</h1>
+
+  <h2>Categories</h2>
+
+  <ul>
+    <% categories.forEach(category => { %>
+      <li><%= category.name %></li>
+    <% }); %>
+  </ul>
+
+</body>
+</html>

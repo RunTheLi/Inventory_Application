@@ -65,6 +65,35 @@ async function getItem(id) {
   return rows[0]
 }
 
+async function getAllItemsWithCategories() {
+  const { rows } = await pool.query(
+    `SELECT
+      items.id,
+      items.name AS item_name,
+      items.quantity,
+      items.price,
+      items.description,
+      categories.name AS category_name
+    FROM items
+    JOIN categories
+      ON items.category_id = categories.id`);
+    return rows;
+}
+
+async function deleteCategory(id) {
+  await pool.query(
+  "DELETE FROM categories WHERE id = $1", 
+  [id]
+  );
+}
+
+async function deleteItem(id) {
+  await pool.query(
+  "DELETE FROM items WHERE id = $1", 
+  [id]
+  );
+}
+
 module.exports = {
     getAllCategories,
     getCategory,
@@ -73,5 +102,8 @@ module.exports = {
     insertItem,
     insertCategory,
     updateCategory,
-    updateItem
+    updateItem,
+    deleteCategory,
+    deleteItem,
+    getAllItemsWithCategories
 };
