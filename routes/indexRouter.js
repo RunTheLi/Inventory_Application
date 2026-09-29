@@ -1,10 +1,13 @@
 // routes/indexRouter.js
+
 const { Router } = require("express");
-const db = require("../db/queries");
 
 const {
   getAllCategories,
-  getAllItems
+  getAllItemsWithCategories,
+  getCategory,
+  getItemsByCategory,
+  getItem
 } = require("../db/queries");
 
 const indexRouter = Router();
@@ -12,12 +15,51 @@ const indexRouter = Router();
 indexRouter.get("/", async (req, res) => {
   try {
     const categories = await getAllCategories();
-    const items = await getAllItems();
+    const items = await getAllItemsWithCategories();
 
     res.render("index", {
       categories,
       items
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong.");
+  }
+});
+
+indexRouter.get("/categories/:id", async (req, res) => {
+  // your code
+  try {
+    const category = await getCategory(req.params.id);
+    const items = await getItemsByCategory(req.params.id);
+
+    if (!category) {
+      return res.status(404).send("Category not found");
+    }
+
+    res.render("category", {
+      category,
+      items
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong.");
+  }
+});
+
+indexRouter.get("/items/:id", async (req, res) => {
+  // your code
+  try {
+    const item = await getItem(req.params.id);
+
+    if (!item) {
+      return res.status(404).send("Item not found");
+    }
+
+    res.render("item", {
+      item
+    })
+
   } catch (error) {
     console.error(error);
     res.status(500).send("Something went wrong.");

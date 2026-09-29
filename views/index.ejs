@@ -17,5 +17,18 @@
     <% }); %>
   </ul>
 
+  <h2>Items</h2> 
+  
+  <ul> 
+    <% items.forEach(item => { %> 
+      <li> 
+        <strong><%= item.item_name %></strong><br> 
+        Category: <%= item.category_name %><br> 
+        Quantity: <%= item.quantity %><br> 
+        Price: <%= item.price %><br> 
+        <%= item.description %> 
+    </li> <% }); %> 
+  </ul>
+
 </body>
 </html>

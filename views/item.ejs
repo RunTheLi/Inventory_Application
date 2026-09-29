@@ -1,0 +1,19 @@
+<!-- views/item.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= item.name %></title>
+</head>
+<body>
+  <h1><%= item.name %></h1>
+
+  <p>Category ID: <%= item.category_id %></p>
+  <p>Quantity: <%= item.quantity %></p>
+  <p>Price: <%= item.price %></p>
+  <p>Description: <%= item.description %></p>
+
+  <a href="/items">Back to Items</a>
+</body>
+</html>

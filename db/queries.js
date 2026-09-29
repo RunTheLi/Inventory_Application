@@ -80,6 +80,13 @@ async function getAllItemsWithCategories() {
     return rows;
 }
 
+async function getItemsByCategory(categoryId) {
+   const { rows } = await pool.query(
+    "SELECT * FROM items WHERE category_id = $1 ORDER BY id", [categoryId]
+  );
+  return rows;
+}
+
 async function deleteCategory(id) {
   await pool.query(
   "DELETE FROM categories WHERE id = $1", 
@@ -95,15 +102,16 @@ async function deleteItem(id) {
 }
 
 module.exports = {
-    getAllCategories,
-    getCategory,
-    getAllItems,
-    getItem,
-    insertItem,
-    insertCategory,
-    updateCategory,
-    updateItem,
-    deleteCategory,
-    deleteItem,
-    getAllItemsWithCategories
+  getAllCategories,
+  getCategory,
+  insertCategory,
+  updateCategory,
+  deleteCategory,
+  getAllItems,
+  getItem,
+  insertItem,
+  updateItem,
+  deleteItem,
+  getAllItemsWithCategories,
+  getItemsByCategory
 };
