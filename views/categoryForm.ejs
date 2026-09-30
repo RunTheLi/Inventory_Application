@@ -1,0 +1,22 @@
+<!--views/categoryForm.ejs-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory App</title>
+</head>
+<body>
+  <h1>Create Category</h1>
+
+  <form method="POST" action="/categories/new">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <button type="submit">Create Category</button>
+  </form>
+
+  <br>
+  <a href="/categories">Back to Categories</a>
+</body>
+</html>

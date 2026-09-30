@@ -57,12 +57,22 @@ async function updateItem(id, name, quantity, price, description, categoryId
 
 
 async function getItem(id) {
-    const { rows } = await pool.query(
-    "SELECT * FROM items WHERE id = $1",
+  const { rows } = await pool.query(
+    `SELECT 
+      items.id,
+      items.name AS item_name,
+      items.quantity,
+      items.price,
+      items.description,
+      items.category_id,
+      categories.name AS category_name
+    FROM items
+    JOIN categories ON items.category_id = categories.id
+    WHERE items.id = $1`,
     [id]
   );
 
-  return rows[0]
+  return rows[0];
 }
 
 async function getAllItemsWithCategories() {

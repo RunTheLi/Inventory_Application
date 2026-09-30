@@ -7,7 +7,8 @@ const {
   getAllItemsWithCategories,
   getCategory,
   getItemsByCategory,
-  getItem
+  getItem,
+  insertCategory
 } = require("../db/queries");
 
 const indexRouter = Router();
@@ -25,6 +26,23 @@ indexRouter.get("/", async (req, res) => {
     console.error(error);
     res.status(500).send("Something went wrong.");
   }
+});
+
+indexRouter.post("/categories/new", async (req, res) => {
+  try {
+  const name = req.body.name;
+
+  await insertCategory(name);
+
+  res.redirect("/");
+} catch (error) {
+  console.error(error);
+  res.status(500).send("Something went wrong.");
+}
+});
+
+indexRouter.get("/categories/new", (req, res) => {
+  res.render("categoryForm");
 });
 
 indexRouter.get("/categories/:id", async (req, res) => {
