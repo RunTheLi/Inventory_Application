@@ -8,7 +8,8 @@ const {
   getCategory,
   getItemsByCategory,
   getItem,
-  insertCategory
+  insertCategory,
+  insertItem,
 } = require("../db/queries");
 
 const indexRouter = Router();
@@ -65,6 +66,36 @@ indexRouter.get("/categories/:id", async (req, res) => {
   }
 });
 
+indexRouter.get("/items/new", async (req, res) => {
+  try {
+    const categories = await getAllCategories();
+
+    res.render("itemForm", {
+      categories
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong.");
+  }
+});
+
+indexRouter.post("/items/new", async (req, res) => {
+  try {
+    const name = req.body.name;
+    const quantity = req.body.quantity;
+    const price = req.body.price;
+    const description = req.body.description;
+    const categoryId = req.body.categoryId;
+
+    await insertItem(name, quantity, price, description, categoryId);
+
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong")
+  }
+});
+
 indexRouter.get("/items/:id", async (req, res) => {
   // your code
   try {
@@ -81,6 +112,42 @@ indexRouter.get("/items/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Something went wrong.");
+  }
+});
+
+indexRouter.get("/categories/:id/edit", async (req, res) => {
+
+    try {
+      const id = req.params.id;
+
+      const category = await getCategory(id);
+
+      if (!category) {
+      return res.status(404).send("Category not found");
+    }
+
+    res.render("categoryEditForm", { category });
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Something went wrong");
+    }
+});
+
+indexRouter.post("/categories/:id/edit", async (req, res) => {
+  try {
+    // 1. get id
+    const id = req.params.id;
+
+    const name = req.body.name;
+
+    await updateCategory(id, name)
+
+    res.redirect("/");
+    // 4. redirect somewhere
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong");
   }
 });
 
