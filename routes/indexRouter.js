@@ -10,6 +10,10 @@ const {
   getItem,
   insertCategory,
   insertItem,
+  updateCategory,
+  updateItem,
+  deleteItem,
+  deleteCategory
 } = require("../db/queries");
 
 const indexRouter = Router();
@@ -145,6 +149,91 @@ indexRouter.post("/categories/:id/edit", async (req, res) => {
 
     res.redirect("/");
     // 4. redirect somewhere
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong");
+  }
+});
+
+indexRouter.get("/items/:id/edit", async (req, res) => {
+  try {
+    // 1. get id from req.params
+    const id = req.params.id;
+    
+    // 2. get item from database
+    const item = await getItem(id)
+
+    // 3. get all categories
+    const categories = await getAllCategories();
+
+    // 4. check if item exists
+    if (!item) {
+      return res.status(404).send("Item not found");
+    }
+    
+    res.render("itemEditForm", {
+      item,
+      categories
+    });
+    // 5. render itemEditForm
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong");
+  }
+});
+
+indexRouter.post("/items/:id/edit", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const name = req.body.name;
+    const quantity = req.body.quantity;
+    const price = req.body.price;
+    const description = req.body.description;
+    const categoryId = req.body.categoryId;
+
+    await updateItem(
+      id,
+      name,
+      quantity,
+      price,
+      description,
+      categoryId
+    );
+
+    res.redirect(`/items/${id}`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong");
+  }
+});
+
+indexRouter.post("/items/:id/delete", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    await deleteItem(id);
+
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong")
+  }
+})
+
+indexRouter.post("/categories/:id/delete", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const items = await getItemsByCategory(id);
+
+    if (items.length > 0) {
+      return res.status(400).send("Cannot delete category with items.");
+    }
+
+    await deleteCategory(id);
+
+    res.redirect("/");
   } catch (error) {
     console.error(error);
     res.status(500).send("Something went wrong");

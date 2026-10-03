@@ -1,26 +1,50 @@
 <!-- views/category.ejs -->
 
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Inventory App</title>
+  <title><%= category.name %></title>
 </head>
+
 <body>
+
   <h1><%= category.name %></h1>
 
-  <h2>Items</h2> 
-  
-  <ul> 
-    <% items.forEach(item => { %> 
-      <li> 
-        <strong><%= item.item_name %></strong><br> 
-        Category: <%= item.category_name %><br> 
-        Quantity: <%= item.quantity %><br> 
-        Price: <%= item.price %><br> 
-        <%= item.description %> 
-    </li> <% }); %> 
+  <a href="/">Back to Home</a>
+
+  <a href="/categories/<%= category.id %>/edit">
+    Edit Category
+  </a>
+
+  <form method="POST" action="/categories/<%= category.id %>/delete">
+    <button type="submit">Delete Category</button>
+  </form>
+
+  <h2>Items</h2>
+
+  <ul>
+
+    <% items.forEach(item => { %>
+
+      <li>
+
+        <strong><%= item.name %></strong><br>
+
+        Quantity: <%= item.quantity %><br>
+
+        Price: <%= item.price %><br>
+
+        <%= item.description %>
+
+      </li>
+
+    <% }); %>
+
   </ul>
 
 </body>
+
 </html>

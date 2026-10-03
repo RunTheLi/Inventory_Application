@@ -1,5 +1,4 @@
 <!-- views/index.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,27 +6,44 @@
   <title>Inventory App</title>
 </head>
 <body>
+
   <h1>Inventory App</h1>
 
   <h2>Categories</h2>
 
+  <a href="/categories/new">Create New Category</a>
+
   <ul>
     <% categories.forEach(category => { %>
-      <li><%= category.name %></li>
+      <li>
+        <a href="/categories/<%= category.id %>">
+          <%= category.name %>
+        </a>
+      </li>
     <% }); %>
   </ul>
 
-  <h2>Items</h2> 
-  
-  <ul> 
-    <% items.forEach(item => { %> 
-      <li> 
-        <strong><%= item.item_name %></strong><br> 
-        Category: <%= item.category_name %><br> 
-        Quantity: <%= item.quantity %><br> 
-        Price: <%= item.price %><br> 
-        <%= item.description %> 
-    </li> <% }); %> 
+
+  <h2>Items</h2>
+
+  <a href="/items/new">Create New Item</a>
+
+  <ul>
+    <% items.forEach(item => { %>
+      <li>
+        <strong>
+          <a href="/items/<%= item.id %>">
+            <%= item.item_name %>
+          </a>
+        </strong>
+        <br>
+
+        Category: <%= item.category_name %><br>
+        Quantity: <%= item.quantity %><br>
+        Price: <%= item.price %><br>
+        <%= item.description %>
+      </li>
+    <% }); %>
   </ul>
 
 </body>
