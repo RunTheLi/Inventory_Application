@@ -35,7 +35,11 @@ indexRouter.get("/", async (req, res) => {
 
 indexRouter.post("/categories/new", async (req, res) => {
   try {
-  const name = req.body.name;
+  const name = req.body.name ? req.body.name.trim() : "";
+
+  if (!name) {
+      return res.status(400).send("Category name is required.");
+    }
 
   await insertCategory(name);
 
@@ -85,11 +89,29 @@ indexRouter.get("/items/new", async (req, res) => {
 
 indexRouter.post("/items/new", async (req, res) => {
   try {
-    const name = req.body.name;
-    const quantity = req.body.quantity;
-    const price = req.body.price;
-    const description = req.body.description;
-    const categoryId = req.body.categoryId;
+    const name = req.body.name ? req.body.name.trim() : "";
+    const quantity = Number(req.body.quantity);
+    const price = Number(req.body.price);
+    const description = req.body.description
+      ? req.body.description.trim()
+      : "";
+    const categoryId = Number(req.body.categoryId);
+
+    if (!name) {
+      return res.status(400).send("Item name is required.");
+    }
+
+    if (!Number.isInteger(quantity) || quantity < 0) {
+      return res.status(400).send("Quantity must be a non-negative integer.");
+    }
+
+    if (!Number.isFinite(price) || price < 0) {
+      return res.status(400).send("Price must be a non-negative number.");
+    }
+
+    if (!Number.isInteger(categoryId) || categoryId <= 0) {
+      return res.status(400).send("A valid category is required.");
+    }
 
     await insertItem(name, quantity, price, description, categoryId);
 
@@ -140,18 +162,19 @@ indexRouter.get("/categories/:id/edit", async (req, res) => {
 
 indexRouter.post("/categories/:id/edit", async (req, res) => {
   try {
-    // 1. get id
     const id = req.params.id;
+    const name = req.body.name ? req.body.name.trim() : "";
 
-    const name = req.body.name;
+    if (!name) {
+      return res.status(400).send("Category name is required.");
+    }
 
-    await updateCategory(id, name)
+    await updateCategory(id, name);
 
     res.redirect("/");
-    // 4. redirect somewhere
   } catch (error) {
     console.error(error);
-    res.status(500).send("Something went wrong");
+    res.status(500).send("Something went wrong.");
   }
 });
 
@@ -186,11 +209,29 @@ indexRouter.post("/items/:id/edit", async (req, res) => {
   try {
     const id = req.params.id;
 
-    const name = req.body.name;
-    const quantity = req.body.quantity;
-    const price = req.body.price;
-    const description = req.body.description;
-    const categoryId = req.body.categoryId;
+    const name = req.body.name ? req.body.name.trim() : "";
+    const quantity = Number(req.body.quantity);
+    const price = Number(req.body.price);
+    const description = req.body.description
+      ? req.body.description.trim()
+      : "";
+    const categoryId = Number(req.body.categoryId);
+
+    if (!name) {
+      return res.status(400).send("Item name is required.");
+    }
+
+    if (!Number.isInteger(quantity) || quantity < 0) {
+      return res.status(400).send("Quantity must be a non-negative integer.");
+    }
+
+    if (!Number.isFinite(price) || price < 0) {
+      return res.status(400).send("Price must be a non-negative number.");
+    }
+
+    if (!Number.isInteger(categoryId) || categoryId <= 0) {
+      return res.status(400).send("A valid category is required.");
+    }
 
     await updateItem(
       id,

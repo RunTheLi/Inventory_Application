@@ -3,48 +3,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inventory App</title>
+
+  <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
 
-  <h1>Inventory App</h1>
+  <header class="header">
+    <div class="container">
+      <h1>📦 Inventory App</h1>
+      <p>Manage your inventory easily.</p>
+    </div>
+  </header>
 
-  <h2>Categories</h2>
 
-  <a href="/categories/new">Create New Category</a>
+  <main class="container">
 
-  <ul>
-    <% categories.forEach(category => { %>
-      <li>
-        <a href="/categories/<%= category.id %>">
-          <%= category.name %>
+    <!-- Categories -->
+
+    <section class="section">
+
+      <div class="section-header">
+        <h2>Categories</h2>
+
+        <a href="/categories/new" class="button">
+          + New Category
         </a>
-      </li>
-    <% }); %>
-  </ul>
+      </div>
 
+      <div class="category-list">
 
-  <h2>Items</h2>
+        <% categories.forEach(category => { %>
 
-  <a href="/items/new">Create New Item</a>
-
-  <ul>
-    <% items.forEach(item => { %>
-      <li>
-        <strong>
-          <a href="/items/<%= item.id %>">
-            <%= item.item_name %>
+          <a
+            href="/categories/<%= category.id %>"
+            class="category-card"
+          >
+            <h3><%= category.name %></h3>
           </a>
-        </strong>
-        <br>
 
-        Category: <%= item.category_name %><br>
-        Quantity: <%= item.quantity %><br>
-        Price: <%= item.price %><br>
-        <%= item.description %>
-      </li>
-    <% }); %>
-  </ul>
+        <% }); %>
+
+      </div>
+
+    </section>
+
+
+    <!-- Items -->
+
+    <section class="section">
+
+      <div class="section-header">
+        <h2>Items</h2>
+
+        <a href="/items/new" class="button">
+          + New Item
+        </a>
+      </div>
+
+      <div class="items-list">
+
+        <% items.forEach(item => { %>
+
+          <a
+            href="/items/<%= item.id %>"
+            class="item-card"
+          >
+
+            <div>
+              <h3><%= item.item_name %></h3>
+
+              <p class="category">
+                <%= item.category_name %>
+              </p>
+            </div>
+
+            <div class="item-info">
+
+              <span>
+                Quantity: <strong><%= item.quantity %></strong>
+              </span>
+
+              <span>
+                Price: <strong>฿<%= item.price %></strong>
+              </span>
+
+            </div>
+
+          </a>
+
+        <% }); %>
+
+      </div>
+
+    </section>
+
+  </main>
 
 </body>
 </html>

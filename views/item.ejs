@@ -2,25 +2,91 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title><%= item.item_name %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title><%= item.item_name %> - Inventory App</title>
+
+  <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
-  <h1><%= item.item_name %></h1>
 
-  <p>Category: <%= item.category_name %></p>
-  <p>Quantity: <%= item.quantity %></p>
-  <p>Price: <%= item.price %></p>
-  <p>Description: <%= item.description %></p>
+  <header class="header">
+    <div class="container">
 
-  <a href="/">Back to Home</a>
+      <a href="/" class="back-link">
+        ← Back to Inventory
+      </a>
 
-  <a href="/items/<%= item.id %>/edit">Edit Item</a>
+      <h1><%= item.item_name %></h1>
 
-  <form method="POST" action="/items/<%= item.id %>/delete">
-    <button type="submit">Delete Item</button>
-  </form>
+      <p>
+        <%= item.category_name %>
+      </p>
+
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="item-detail">
+
+      <div class="item-detail-info">
+
+        <div class="detail-row">
+          <span>Category</span>
+          <strong><%= item.category_name %></strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Quantity</span>
+          <strong><%= item.quantity %></strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Price</span>
+          <strong>฿<%= item.price %></strong>
+        </div>
+
+        <div class="detail-row">
+          <span>Description</span>
+          <strong>
+            <%= item.description || "No description" %>
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="item-actions">
+
+        <a
+          href="/items/<%= item.id %>/edit"
+          class="button"
+        >
+          Edit Item
+        </a>
+
+        <form
+          method="POST"
+          action="/items/<%= item.id %>/delete"
+        >
+          <button
+            type="submit"
+            class="button delete-button"
+          >
+            Delete Item
+          </button>
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
 
 </body>
+
 </html>

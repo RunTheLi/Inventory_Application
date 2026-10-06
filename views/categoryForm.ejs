@@ -2,21 +2,72 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Inventory App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>New Category - Inventory App</title>
+
+  <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
-  <h1>Create Category</h1>
 
-  <form method="POST" action="/categories/new">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
+  <header class="header">
+    <div class="container">
 
-    <button type="submit">Create Category</button>
-  </form>
+      <a href="/" class="back-link">
+        ← Back to Inventory
+      </a>
 
-  <br>
-  <a href="/categories">Back to Categories</a>
+      <h1>New Category</h1>
+
+      <p>Create a new inventory category.</p>
+
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="form-card">
+
+      <form method="POST" action="/categories/new">
+
+        <div class="form-group">
+
+          <label for="name">
+            Category Name
+          </label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="e.g. Fruits"
+            required
+          >
+
+        </div>
+
+        <div class="form-actions">
+
+          <a href="/" class="button secondary-button">
+            Cancel
+          </a>
+
+          <button type="submit" class="button">
+            Create Category
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
 </body>
+
 </html>
