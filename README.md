@@ -41,12 +41,12 @@ A full-stack inventory management application built with **Node.js, Express, EJS
    ```bash
    npm install
    ```
-2.1 Initialize the project (if needed):
+3. Initialize the project (if needed):
 
    ```bash
    npm init -y
    ```
-2.2 Initialize the project (must):
+4. Initialize the project (must):
 
    ```bash
    npm install express-validator
@@ -58,23 +58,23 @@ A full-stack inventory management application built with **Node.js, Express, EJS
    npm install pg
    ```
 
-3. Create a `.env` file and configure your PostgreSQL connection settings.
+5. Create a `.env` file and configure your PostgreSQL connection settings.
 
-4. Set up the database tables and configure your database connection.
+6. Set up the database tables and configure your database connection.
 
-5. Seed the database with sample data:
+7. Seed the database with sample data:
 
    ```bash
    npm run seed
    ```
 
-6. Start the application:
+8. Start the application:
 
    ```bash
    npm start
    ```
 
-7. Open `http://localhost:3000` in your browser.
+9. Open `http://localhost:3000` in your browser.
 
 ## What I Learned
 
