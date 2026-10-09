@@ -76,7 +76,8 @@ A full-stack inventory management application built with **Node.js, Express, EJS
 
 
 
-- accomplished
+
+## accomplished
 
 - PostgreSQL database
 
