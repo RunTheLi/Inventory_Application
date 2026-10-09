@@ -41,6 +41,18 @@ A full-stack inventory management application built with **Node.js, Express, EJS
    ```bash
    npm install
    ```
+   ```bash
+   Initialize the project (if needed):
+   npm init -y
+   ```bash
+   npm install express-validator
+   ```
+   ```bash
+   npm install ejs
+   ```
+   ```bash
+   npm install pg
+   ```
 
 3. Create a `.env` file and configure your PostgreSQL connection settings.
 
