@@ -261,3 +261,54 @@ body {
 .secondary-button:hover {
   background: #ddd;
 }
+
+
+/* Responsive Design */
+
+@media (max-width: 600px) {
+  .container {
+    width: 92%;
+  }
+
+  .header {
+    padding: 24px 0;
+    margin-bottom: 24px;
+  }
+
+  .section-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .item-card {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .item-info {
+    flex-wrap: wrap;
+    gap: 10px 20px;
+  }
+
+  .form-card {
+    padding: 20px;
+  }
+
+  .form-actions {
+    flex-wrap: wrap;
+  }
+
+  .item-detail {
+    padding: 20px;
+  }
+
+  .detail-row {
+    gap: 12px;
+  }
+
+  .item-actions {
+    flex-wrap: wrap;
+  }
+}
