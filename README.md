@@ -42,8 +42,11 @@ A full-stack inventory management application built with **Node.js, Express, EJS
    npm install
    ```
    ```bash
-   Initialize the project (if needed):
+2.1 Initialize the project (if needed):
+   ```bash
    npm init -y
+   ```
+2.2 Initialize the project (must):
    ```bash
    npm install express-validator
    ```
